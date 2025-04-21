@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:29:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 18:47:14 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 19:01:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_main
 	t_positon			*player_pos;
 }						t_main;
 
+char					init_map(t_map *map);
 t_image					*get_texture(t_mlx *mlx, t_ray *ray);
 int						rgbtouint(char **colors);
 int						key_release(int keycode, void *main);

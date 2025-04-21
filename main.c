@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:42:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 18:26:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 19:11:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ int	main(int argc, char **argv)
 	if (handle_map(main, &fd, argv[1]))
 		return (0);
 	main->mlx.last_tick = 0;
-	if (!init_mlx(main, &main->mlx)) // bunun içinde freele ve derle
+	if (!init_mlx(main, &main->mlx))// bunun içinde freele ve derle
+	{
+		free_all(main);
 		return (0);
+	} 
 	free_all(main);
 	return (0);
 }
