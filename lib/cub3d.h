@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:29:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 19:01:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 19:53:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_keys
 }						t_keys;
 
 typedef struct s_main	t_main;
+
 typedef struct s_map_size_params
 {
 	t_main				*m;

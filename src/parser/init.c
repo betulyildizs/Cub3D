@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:25:09 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/20 18:02:36 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:57:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ t_map	*init_map_struct(void)
 	return (map);
 }
 
+void	init_keys(t_keys *keys)
+{
+	if (keys == NULL)
+		return ;
+	keys->w_pressed = 0;
+	keys->s_pressed = 0;
+	keys->a_pressed = 0;
+	keys->d_pressed = 0;
+	keys->left_pressed = 0;
+	keys->right_pressed = 0;
+	keys->esc_pressed = 0;
+}
+
 t_main	*init_all(char *map_name)
 {
 	t_main	*main;
@@ -64,6 +77,7 @@ t_main	*init_all(char *map_name)
 	main->player_pos = (t_positon *)malloc(sizeof(t_positon));
 	if (!main->player_pos)
 		return (NULL);
+	init_keys(&main->keys);
 	main->player_pos->x = -1;
 	main->player_pos->y = -1;
 	main->player_pos->count = 0;

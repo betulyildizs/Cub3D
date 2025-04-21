@@ -6,11 +6,29 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:07:08 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 15:32:46 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 20:51:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/cub3d.h"
+
+void clean_mlx(t_mlx *mlx)
+{
+    if (!mlx)
+        return;
+    if (mlx->image.img) 
+        mlx_destroy_image(mlx->mlx, mlx->image.img);
+    if (mlx->so_text.img)
+        mlx_destroy_image(mlx->mlx, mlx->so_text.img);
+    if (mlx->we_text.img)
+        mlx_destroy_image(mlx->mlx, mlx->we_text.img);
+    if (mlx->no_text.img)
+        mlx_destroy_image(mlx->mlx, mlx->no_text.img);
+    if (mlx->ea_text.img)
+        mlx_destroy_image(mlx->mlx, mlx->ea_text.img);
+    if (mlx->win)
+        mlx_destroy_window(mlx->mlx, mlx->win);
+}
 
 void	free_copy_map(t_map *map)
 {
@@ -84,15 +102,18 @@ void	free_textures(t_textures *textures)
 	free(textures);
 }
 
-void	free_all(t_main *main)
+void free_all(t_main *main)
 {
-	if (!main)
-		return ;
-	if (main->textures)
-		free_textures(main->textures);
-	if (main->map)
-		free_map(main->map);
-	if (main->player_pos)
-		free(main->player_pos);
-	free(main);
+    if (!main)
+        return ;
+    clean_mlx(&main->mlx);
+    if (main->textures)
+    {
+        free_textures(main->textures);
+        free(main->textures);
+    }
+    if (main->map)
+        free_map(main->map);
+    free(main->player_pos);
+    free(main);
 }

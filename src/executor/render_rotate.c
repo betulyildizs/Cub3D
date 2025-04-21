@@ -2,6 +2,8 @@
 
 void    if_condition(t_main *main, const double angle, const double delta_time)
 {
+	if (main == NULL)
+		return ;
     if (main->keys.w_pressed)
 		move_forward(main, delta_time);
 	if (main->keys.s_pressed)

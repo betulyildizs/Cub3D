@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:42:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 19:11:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 20:55:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,31 @@ int	main(int argc, char **argv)
 {
 	t_main	*main;
 	int		fd;
+	int		exit_code;
 
 	if (argc != 2)
-		return (0);
+	{
+		ft_putstr_fd("Usage: ./cub3D <map_file>\n", 1);
+		return (1);
+	}
 	main = init_all(argv[1]);
+	if (!main)
+	{
+		ft_putstr_fd("Initialization failed\n", 1);
+		return (1);
+	}
+	exit_code = 0;
 	fd = handle_textures(main, argv[1]);
 	if (fd == 1)
-		return (0);
-	if (handle_map(main, &fd, argv[1]))
-		return (0);
-	main->mlx.last_tick = 0;
-	if (!init_mlx(main, &main->mlx))// bunun içinde freele ve derle
+		exit_code = 1;
+	else if (handle_map(main, &fd, argv[1]))
+		exit_code = 1;
+	else
 	{
-		free_all(main);
-		return (0);
-	} 
+		main->mlx.last_tick = 0;
+		if (!init_mlx(main, &main->mlx))
+			exit_code = 1;
+	}
 	free_all(main);
-	return (0);
+	return (exit_code);
 }
