@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_processing.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:27:10 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/18 19:27:14 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/22 01:14:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	process_line(t_textures *textures, char *line)
 	return (0);
 }
 
-int	fill_textures_struct(t_textures *textures, const char *file_name)
+int	fill_textures_struct(t_textures *textures, const char *file_name, t_main *main)
 {
 	int		fd;
 	char	*line;
@@ -51,7 +51,14 @@ int	fill_textures_struct(t_textures *textures, const char *file_name)
 
 	fd = open(file_name, O_RDWR, 0777);
 	if (fd < 0)
-		return (perror("Harita dosyası okunamadı.\n"), -1);
+	{
+		perror("Error: Couldn't open texture file");
+		free_textures(textures);
+		textures = NULL;
+		free_all(main);
+		main = NULL;
+		exit(1);
+	}
 	while (1)
 	{
 		line = get_next_line(fd);

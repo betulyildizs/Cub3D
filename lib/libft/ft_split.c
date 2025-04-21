@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:35:31 by halozdem          #+#    #+#             */
-/*   Updated: 2023/12/22 18:21:34 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:28:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char	**free_array(char **ptr, int i)
 		free(ptr[i]);
 	}
 	free(ptr);
+
 	return (0);
 }
 

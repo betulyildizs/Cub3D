@@ -53,24 +53,25 @@ static void	setup_hooks(t_mlx *mlx, t_main *main)
 	mlx_loop_hook(mlx->mlx, render, main);
 }
 
-int init_mlx(t_main *main, t_mlx *mlx)
+int     init_mlx(t_main *main, t_mlx *mlx)
 {
-	mlx->mlx = mlx_init();
-	if (!mlx->mlx)
-		return (1);
-	if (init_mlx_window(mlx))
-		return (1);
-	if (init_main_image(mlx))
-		return (1);
-	if (init_texture(mlx, &mlx->we_text.img, main->textures->we, &mlx->we_text))
-		return (1);
-	if (init_texture(mlx, &mlx->ea_text.img, main->textures->ea, &mlx->ea_text))
-		return (1);
-	if (init_texture(mlx, &mlx->so_text.img, main->textures->so, &mlx->so_text))
-		return (1);
-	if (init_texture(mlx, &mlx->no_text.img, main->textures->no, &mlx->no_text))
-		return (1);
-	setup_hooks(mlx, main);
-	mlx_loop(mlx->mlx);
-	return (1);
+    mlx->mlx = mlx_init();
+    if (!mlx->mlx)
+        return (1);
+    if (init_mlx_window(mlx))
+        return (1);
+    if (init_main_image(mlx))
+        return (1);
+    if (init_texture(mlx, &mlx->we_text.img, main->textures->we, &mlx->we_text))
+        return (1);
+    if (init_texture(mlx, &mlx->ea_text.img, main->textures->ea, &mlx->ea_text))
+        return (1);
+    if (init_texture(mlx, &mlx->so_text.img, main->textures->so, &mlx->so_text))
+        return (1);
+    if (init_texture(mlx, &mlx->no_text.img, main->textures->no, &mlx->no_text))
+        return (1);
+    setup_hooks(mlx, main);
+    mlx_loop(mlx->mlx);
+    free_all(main);
+    return (1);
 }

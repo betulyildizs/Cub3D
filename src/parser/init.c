@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:25:09 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 19:57:29 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 01:13:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,24 @@ t_main	*init_all(char *map_name)
 		return (NULL);
 	main->player_pos = (t_positon *)malloc(sizeof(t_positon));
 	if (!main->player_pos)
-		return (NULL);
-	init_keys(&main->keys);
+		return (free(main), NULL);
 	main->player_pos->x = -1;
 	main->player_pos->y = -1;
 	main->player_pos->count = 0;
+	init_keys(&main->keys);
 	main->textures = init_textures_struct();
 	if (!main->textures)
-		return (free(main), NULL);
+		return (free(main->player_pos), free(main), NULL);
 	main->map = init_map_struct();
 	if (!main->map)
-		return (free(main->textures->textures), free(main->textures),
-			free(main), NULL);
+	{
+		free(main->textures->textures);
+		free(main->textures->keys);
+		free(main->textures);
+		free(main->player_pos);
+		free(main);
+		return (NULL);
+	}
+
 	return (main);
 }

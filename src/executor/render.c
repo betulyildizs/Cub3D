@@ -83,8 +83,9 @@ int	render(void *param)
 	if_condition(main, angle, delta_time);
 	if (main->keys.esc_pressed)
 	{
+		free_all(main);
 		mlx_destroy_window(main->mlx.mlx, main->mlx.win);
-		exit(0);
+		exit(1);
 	}
 	display(main);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:07:08 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 20:51:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 01:07:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void clean_mlx(t_mlx *mlx)
         mlx_destroy_image(mlx->mlx, mlx->no_text.img);
     if (mlx->ea_text.img)
         mlx_destroy_image(mlx->mlx, mlx->ea_text.img);
-    if (mlx->win)
-        mlx_destroy_window(mlx->mlx, mlx->win);
 }
 
 void	free_copy_map(t_map *map)
@@ -84,36 +82,55 @@ static void	free_texture_array(char **array)
 void	free_textures(t_textures *textures)
 {
 	if (!textures)
-		return ;
-	if (textures->no)
+		return;
+	
+	if (textures->no != NULL)
 		free(textures->no);
-	if (textures->so)
+	if (textures->so != NULL)
 		free(textures->so);
-	if (textures->we)
+	if (textures->we != NULL)
 		free(textures->we);
-	if (textures->ea)
+	if (textures->ea != NULL)
 		free(textures->ea);
-	free_texture_array(textures->c);
-	free_texture_array(textures->f);
-	if (textures->keys)
+
+	if (textures->c != NULL)
+		free_texture_array(textures->c);
+	if (textures->f != NULL)
+		free_texture_array(textures->f);
+
+	if (textures->keys != NULL)
 		free(textures->keys);
-	if (textures->textures)
+	if (textures->textures != NULL)
 		free(textures->textures);
+
 	free(textures);
 }
 
 void free_all(t_main *main)
 {
     if (!main)
-        return ;
-    clean_mlx(&main->mlx);
-    if (main->textures)
-    {
-        free_textures(main->textures);
-        free(main->textures);
-    }
+        return;
+
+    // Harita ve diğer verilerin serbest bırakılması
     if (main->map)
         free_map(main->map);
-    free(main->player_pos);
+    
+    if (main->textures)
+        free_textures(main->textures);
+
+    if (main->player_pos)
+        free(main->player_pos);
+
+    // mlx kaynaklarının temizlenmesi
+    clean_mlx(&main->mlx);
+
+    // mlx.mlx'yi temizlemeden önce free yapma
+    if (main->mlx.mlx)
+    {
+        mlx_destroy_display(main->mlx.mlx);  // Önce display'i yok et
+        free(main->mlx.mlx);  // Ardından bellek alanını serbest bırak
+    }
+
+    // Son olarak ana yapı bellekten kaldırılır
     free(main);
 }

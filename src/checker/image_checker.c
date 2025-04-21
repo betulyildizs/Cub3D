@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:50:21 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/20 18:03:43 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/22 00:44:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ char	check_color_value(char *color_str)
 		return (EXIT_FAILURE);
 	}
 	free(temp_s);
+	temp_s = NULL;
 	return (EXIT_SUCCESS);
 }

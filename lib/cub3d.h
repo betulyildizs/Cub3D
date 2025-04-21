@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:29:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 19:53:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 00:50:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct s_main
 	t_keys				keys;
 	t_textures			*textures;
 	t_positon			*player_pos;
+	int					error;
 }						t_main;
 
 char					init_map(t_map *map);
@@ -160,7 +161,6 @@ t_image					*get_texture(t_mlx *mlx, t_ray *ray);
 int						rgbtouint(char **colors);
 int						key_release(int keycode, void *main);
 char					get_map_size(t_main *main, int *fd, const char *file_name);
-int						fill_textures_struct(t_textures *textures, const char *file_name);
 void					perform_dda(t_ray *ray, char **map);
 void					set_ray_step(t_ray *ray, t_positon *player_pos);
 void					init_ray(t_ray *ray, t_positon *player_pos, int x);
@@ -215,4 +215,5 @@ void					set_east_direction(float dir[2], float plane[2]);
 void					set_west_direction(float dir[2], float plane[2]);
 int						process_texture_lines(t_line_parse *p);
 void					if_condition(t_main *main, const double angle, const double delta_time);
+int						fill_textures_struct(t_textures *textures, const char *file_name, t_main *main);
 #endif
