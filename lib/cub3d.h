@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:29:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/20 18:08:51 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 18:47:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,13 +154,28 @@ typedef struct s_main
 	t_positon			*player_pos;
 }						t_main;
 
+t_image					*get_texture(t_mlx *mlx, t_ray *ray);
+int						rgbtouint(char **colors);
+int						key_release(int keycode, void *main);
+char					get_map_size(t_main *main, int *fd, const char *file_name);
+int						fill_textures_struct(t_textures *textures, const char *file_name);
+void					perform_dda(t_ray *ray, char **map);
+void					set_ray_step(t_ray *ray, t_positon *player_pos);
+void					init_ray(t_ray *ray, t_positon *player_pos, int x);
+void					draw_background(t_main *main);
+void					move_backward(t_main *main, const double delta_time);
+void					move_left(t_main *main, const double delta_time);
+void					move_right(t_main *main, const double delta_time);
+void					move_forward(t_main *main, const double delta_time);
+void					rotate_left(t_main *main, const double angle);
+void					rotate_right(t_main *main, const double angle);
 int						has_non_space_or_newline(const char *str);
 bool					check_map_error(t_main *main, char *line, bool *error);
 void					process_map_line(t_main *main, char *line, int *i);
 int						skip_identifiers(int fd, char **line);
 int						fill_map_struct(t_main *main, int *fd,
 							const char *file_name);
-char					init_mlx(t_main *main, t_mlx *mlx);
+int						init_mlx(t_main *main, t_mlx *mlx);
 t_textures				*init_textures_struct(void);
 t_main					*init_all(char *map_name);
 t_map					*init_map_struct(void);
@@ -196,5 +211,6 @@ void					set_north_direction(float dir[2], float plane[2]);
 void					set_south_direction(float dir[2], float plane[2]);
 void					set_east_direction(float dir[2], float plane[2]);
 void					set_west_direction(float dir[2], float plane[2]);
-
+int						process_texture_lines(t_line_parse *p);
+void					if_condition(t_main *main, const double angle, const double delta_time);
 #endif
