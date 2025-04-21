@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:37:34 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/21 17:41:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/21 18:30:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	key_release(int keycode, void *main)
 		keys->right_pressed = 0;
 	else if (keycode == KEY_ESC)
 		keys->esc_pressed = 0;
+	return (0);
 }
 
 int	rgbtouint(char **colors)
