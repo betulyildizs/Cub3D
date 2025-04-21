@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:42:14 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/20 18:06:37 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 18:13:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	if (handle_map(main, &fd, argv[1]))
 		return (0);
 	main->mlx.last_tick = 0;
-	if (!init_mlx(main, &main->mlx))
+	if (!init_mlx(main, &main->mlx)) // bunun içinde freele ve derle
 		return (0);
 	free_all(main);
 	return (0);

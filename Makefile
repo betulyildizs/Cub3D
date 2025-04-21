@@ -1,7 +1,7 @@
 CC = cc -g
 CFLAGS = -I./lib/libft -I/usr/include -I./lib/minilibx -O3 #-fsanitize=address -g
 MLXFLAGS = -L./lib/minilibx -lmlx -L/usr/lib -lXext -lX11 -lm -lz
-NAME = cub3d
+NAME = cub3D
 
 # Libft kaynak dosyalarını buraya ekledik
 LIBFT_SRCS = lib/libft/ft_strlen.c lib/libft/ft_memmove.c lib/libft/ft_strlcpy.c \
@@ -20,7 +20,15 @@ LIBFT_SRCS = lib/libft/ft_strlen.c lib/libft/ft_memmove.c lib/libft/ft_strlcpy.c
 	lib/libft/ft_lstiter.c lib/libft/ft_lstdelone.c lib/libft/ft_lstmap.c \
 	lib/libft/ft_memcpy.c lib/libft/ft_lstclear.c
 
-SRCS = main.c src/parser/fill_struct.c src/parser/init.c src/utils/parser_utils.c src/utils/parser_utils2.c src/checker/flood_fill_v1.c src/checker/image_checker.c src/cleanup/clean_up.c src/checker/flood_fill_v2.c src/checker/flood_fill_v1_2.c $(LIBFT_SRCS) src/executor/mlx.c src/parser/player.c src/checker/image_checker_2.c src/parser/map_init.c src/parser/map_utils.c src/parser/texture_handlers.c src/parser/texture_processing.c src/parser/player_dir.c
+SRCS = main.c src/parser/fill_struct.c src/parser/init.c src/utils/parser_utils.c \
+	src/utils/parser_utils2.c src/checker/flood_fill_v1.c src/checker/image_checker.c \
+	src/cleanup/clean_up.c src/checker/flood_fill_v2.c src/checker/flood_fill_v1_2.c \
+	$(LIBFT_SRCS) src/executor/mlx.c src/parser/player.c src/checker/image_checker_2.c \
+	src/parser/map_init.c src/parser/map_utils.c src/parser/texture_handlers.c \
+	src/parser/texture_processing.c src/parser/player_dir.c src/executor/render.c \
+	src/executor/render_rotate.c src/executor/display.c src/executor/ray.c \
+	src/executor/init_mlx.c
+
 OBJS = $(SRCS:.c=.o)
 
 MLX_DIR = lib/minilibx

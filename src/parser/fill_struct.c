@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:25:45 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/18 19:44:22 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 15:17:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,22 @@ char	get_map_size(t_main *main, int *fd, const char *file_name)
 	char	*line2;
 	int		i;
 	bool	error;
+	char	*str;
 
 	error = false;
 	i = 1;
 	line = get_next_line(*fd);
-	while (line && *ft_strtrim(line, " ") == '\n')
+	str = ft_strtrim(line, " ");
+	while (line && *str == '\n')
 	{
+		free (str);
 		if (check_map_error(main, line, &error))
 			return (free(line), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(*fd);
+		str = ft_strtrim(line, " ");
 	}
+	free(str);
 	if (error)
 		return (free(line), EXIT_FAILURE);
 	while (line)

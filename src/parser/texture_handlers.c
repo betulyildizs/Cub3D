@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halozdem <halozdem@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:26:48 by halozdem          #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:22 by halozdem         ###   ########.fr       */
+/*   Updated: 2025/04/21 15:12:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static int	handle_texture(t_line_parse *p, char *prefix, int idx)
 
 	if (!ft_strncmp(p->line, prefix, 3) && !p->textures->textures[idx])
 	{
+		char	*str;
+
+		str = ft_strdup(p->line + p->index + 3);
 		p->textures->textures[idx] = 1;
-		content = ft_strtrim(ft_strdup(p->line + p->index + 3), " \n");
+		content = ft_strtrim(str, " \n");
 		if (idx == 0)
 			p->textures->no = content;
 		else if (idx == 1)
@@ -28,6 +31,7 @@ static int	handle_texture(t_line_parse *p, char *prefix, int idx)
 			p->textures->we = content;
 		else if (idx == 3)
 			p->textures->ea = content;
+		free(str);
 		return (1);
 	}
 	return (0);
